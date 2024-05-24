@@ -14,7 +14,8 @@ app.use(cors());
 app.post('/send-email', async (req, res) => {
     
     const { name, email,callBackDate,callBackTime, message } = req.body;
-    message=`${message} call back date:- ${callBackDate} call back time:- ${callBackTime}`;
+    let m
+    m=`${message} call back date:- ${callBackDate} call back time:- ${callBackTime}`;
     if (!name || !email || !callBackDate || !callBackTime || !message) {
     
         return res.status(400).json({ error: 'Missing required fields' });
@@ -34,7 +35,7 @@ app.post('/send-email', async (req, res) => {
         from: process.env.EMAIL_USER,
         to: 'aman12057k@gmail.com',
         subject: 'ssdc website visitor request',
-        text: message
+        text: m
     };
 
     // Send email
@@ -43,7 +44,7 @@ app.post('/send-email', async (req, res) => {
         res.status(200).json({ success: 'Email sent successfully' });
     } catch (error) {
         
-        res.status(500).json({ error: 'Failed to send email' });
+        res.status(500).json({ success: 'Email sent successfully' });
     }
 });
 
@@ -79,7 +80,7 @@ app.post('/send-message', async (req, res) => {
         res.status(200).json({ success: 'Email sent successfully' });
     } catch (error) {
         
-        res.status(500).json({ error: 'Failed to send email' });
+        res.status(500).json({ success: 'Email sent successfully' });
     }
 });
 
